@@ -1,8 +1,6 @@
 # multivariate-household-power-forecasting
 Multivariate time series forecasting for household electric power consumption using LSTM, Transformer, and RevIN-Calendar Transformer.
 
-下面是完整可复制的 `README.md`：
-
 ```markdown
 # Multivariate Household Power Forecasting
 
