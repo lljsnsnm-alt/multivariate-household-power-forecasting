@@ -337,4 +337,3 @@ https://www.data.gouv.fr/fr/datasets/donnees-climatologiques-de-base-mensuelles/
 ## Acknowledgement
 
 This project documentation was partially assisted by ChatGPT for language polishing and organization. The data preprocessing, model training, result recording, and analysis were completed by the author.
-```
