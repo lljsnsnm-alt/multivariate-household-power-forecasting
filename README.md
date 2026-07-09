@@ -1,4 +1,3 @@
-markdown
 # Multivariate Household Power Forecasting
 
 This repository contains a multivariate time series forecasting project for household electric power consumption.
