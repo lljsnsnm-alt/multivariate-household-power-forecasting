@@ -299,7 +299,7 @@ figures/
 
 ## Notes
 
-The original raw electricity data file is not included in this repository because it may be large. It can be downloaded from the official UCI dataset link.
+The original raw electricity data file is not included in this repository. It can be downloaded from the official UCI dataset link.
 
 The processed files included in `dataset/` are used for model training and testing:
 
