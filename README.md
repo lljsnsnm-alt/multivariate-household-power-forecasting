@@ -6,7 +6,7 @@ Multivariate time series forecasting for household electric power consumption us
 
 This repository contains a multivariate time series forecasting project for household electric power consumption.
 
-The task is to use the past 90 days of multivariate features to predict the future global active power consumption for two forecasting horizons:
+The task is to use the past 90 days of multivariate features to predict future global active power consumption for two forecasting horizons:
 
 - Short-term forecasting: 90 days
 - Long-term forecasting: 365 days
@@ -17,7 +17,7 @@ The project compares three models:
 - Transformer
 - RevIN-Calendar Transformer
 
-The final improved model, RevIN-Calendar Transformer, combines reversible instance normalization, calendar periodic features, weather variables, and Transformer encoder blocks.
+The final improved model, RevIN-Calendar Transformer, combines weather variables, calendar periodic features, reversible instance normalization, and Transformer encoder blocks.
 
 ---
 
@@ -32,7 +32,7 @@ https://archive.ics.uci.edu/dataset/235/individual+household+electric+power+cons
 
 The original dataset contains minute-level measurements from a household in France from December 2006 to November 2010.
 
-Main variables include:
+Main electricity variables include:
 
 - `global_active_power`
 - `global_reactive_power`
@@ -90,7 +90,23 @@ global_active_power * 1000 / 60
 
 After preprocessing, each daily sample contains electricity features and weather features.
 
-The final input length is:
+Final daily features include:
+
+- `global_active_power`
+- `global_reactive_power`
+- `voltage`
+- `global_intensity`
+- `sub_metering_1`
+- `sub_metering_2`
+- `sub_metering_3`
+- `sub_metering_remainder`
+- `RR`
+- `NBJRR1`
+- `NBJRR5`
+- `NBJRR10`
+- `NBJBROU`
+
+The input length is:
 
 ```text
 90 days
@@ -120,6 +136,7 @@ The Transformer model uses linear embedding, positional encoding, and Transforme
 The proposed improved model uses:
 
 - RevIN-style sample-level normalization
+- weather variables
 - calendar periodic features
 - positional encoding
 - Transformer encoder
@@ -180,13 +197,12 @@ The RevIN-Calendar Transformer achieves the best performance for both short-term
 ```text
 .
 ├── README.md
-├── preprocess_power_data.py
-├── merge_weather.py
-├── train_lstm.py
-├── train_transformer.py
-├── train_revin_calendar_transformer.py
 ├── dataset/
-│   └── daily_power_weather.csv
+│   ├── daily_power.csv
+│   ├── daily_power_weather.csv
+│   ├── MENSQ_92_previous-1950-2024.csv.gz
+│   ├── train.csv
+│   └── test.csv
 ├── figures/
 │   ├── lstm_weather_90.png
 │   ├── lstm_weather_365.png
@@ -194,10 +210,16 @@ The RevIN-Calendar Transformer achieves the best performance for both short-term
 │   ├── transformer_weather_365.png
 │   ├── revin_calendar_transformer_90.png
 │   └── revin_calendar_transformer_365.png
-└── results/
-    ├── lstm_weather_results.csv
-    ├── transformer_weather_results.csv
-    └── revin_calendar_transformer_results.csv
+├── my_tools/
+│   ├── preprocess_power_data.py
+│   ├── merge_weather.py
+│   └── test_windows.py
+├── train_lstm.py
+├── train_transformer.py
+├── train_revin_calendar_transformer.py
+├── lstm_weather_results.csv
+├── transformer_results.csv
+└── revin_calendar_transformer_results.csv
 ```
 
 ---
@@ -220,14 +242,18 @@ conda install pytorch torchvision torchaudio -c pytorch -y
 ### 2. Preprocess Electricity Data
 
 ```bash
-python preprocess_power_data.py
+python my_tools/preprocess_power_data.py
 ```
+
+This step converts the original minute-level power data into daily-level data.
 
 ### 3. Merge Weather Data
 
 ```bash
-python merge_weather.py
+python my_tools/merge_weather.py
 ```
+
+This step merges monthly weather variables from department 92 into the daily power dataset.
 
 ### 4. Train LSTM
 
@@ -255,16 +281,42 @@ CUDA_VISIBLE_DEVICES=0 python train_revin_calendar_transformer.py
 
 ---
 
+## Output Files
+
+Training produces result CSV files and prediction figures.
+
+Result files:
+
+```text
+lstm_weather_results.csv
+transformer_results.csv
+revin_calendar_transformer_results.csv
+```
+
+Prediction figures are saved in:
+
+```text
+figures/
+```
+
+---
+
 ## Notes
 
-The original raw electricity file and raw weather `.csv.gz` file are not included in this repository because they may be large. They can be downloaded from the official dataset links listed above.
+The original raw electricity data file is not included in this repository because it may be large. It can be downloaded from the official UCI dataset link.
 
-To reproduce the full experiment, download:
+The processed files included in `dataset/` are used for model training and testing:
 
-- `household_power_consumption.txt` from UCI
-- `MENS_departement_92_periode_1950-2024.csv.gz` from data.gouv.fr
+- `daily_power.csv`
+- `daily_power_weather.csv`
+- `train.csv`
+- `test.csv`
 
-Then run the preprocessing scripts.
+The weather file used in this project is:
+
+```text
+MENSQ_92_previous-1950-2024.csv.gz
+```
 
 ---
 
@@ -288,5 +340,5 @@ https://www.data.gouv.fr/fr/datasets/donnees-climatologiques-de-base-mensuelles/
 
 ## Acknowledgement
 
-This report and project documentation were partially assisted by ChatGPT for language polishing and organization. The data preprocessing, model training, result recording, and analysis were completed by the author.
+This project documentation was partially assisted by ChatGPT for language polishing and organization. The data preprocessing, model training, result recording, and analysis were completed by the author.
 ```
