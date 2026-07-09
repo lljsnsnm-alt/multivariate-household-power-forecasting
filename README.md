@@ -1,7 +1,7 @@
 # multivariate-household-power-forecasting
 Multivariate time series forecasting for household electric power consumption using LSTM, Transformer, and RevIN-Calendar Transformer.
 
-```markdown
+markdown
 # Multivariate Household Power Forecasting
 
 This repository contains a multivariate time series forecasting project for household electric power consumption.
