@@ -181,10 +181,10 @@ Each experiment is repeated 5 times using different random seeds. The mean and s
 
 | Model | Horizon | MSE Mean | MSE Std | MAE Mean | MAE Std |
 |---|---:|---:|---:|---:|---:|
-| LSTM + Weather | 90 | 217542.95 | 15697.50 | 359.49 | 16.68 |
-| LSTM + Weather | 365 | 517175.34 | 24154.54 | 603.73 | 10.98 |
-| Transformer + Weather | 90 | 238576.91 | 13841.72 | 379.19 | 14.68 |
-| Transformer + Weather | 365 | 312869.72 | 65755.86 | 444.82 | 53.74 |
+| LSTM  | 90 | 217542.95 | 15697.50 | 359.49 | 16.68 |
+| LSTM  | 365 | 517175.34 | 24154.54 | 603.73 | 10.98 |
+| Transformer  | 90 | 238576.91 | 13841.72 | 379.19 | 14.68 |
+| Transformer  | 365 | 312869.72 | 65755.86 | 444.82 | 53.74 |
 | RevIN-Calendar Transformer | 90 | 184030.11 | 7004.12 | 329.50 | 6.36 |
 | RevIN-Calendar Transformer | 365 | 161432.45 | 8016.35 | 310.86 | 7.57 |
 
@@ -206,8 +206,8 @@ The RevIN-Calendar Transformer achieves the best performance for both short-term
 ├── figures/
 │   ├── lstm_weather_90.png
 │   ├── lstm_weather_365.png
-│   ├── transformer_weather_90.png
-│   ├── transformer_weather_365.png
+│   ├── transformer_90.png
+│   ├── transformer_365.png
 │   ├── revin_calendar_transformer_90.png
 │   └── revin_calendar_transformer_365.png
 ├── my_tools/
