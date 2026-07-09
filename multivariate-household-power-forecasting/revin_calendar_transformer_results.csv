@@ -1,0 +1,3 @@
+model,horizon,mse_mean,mse_std,mae_mean,mae_std,valid_runs
+RevIN-Calendar-Transformer,90,184030.11,7004.1157,329.49896,6.3601594,5
+RevIN-Calendar-Transformer,365,161432.45,8016.354,310.8644,7.569009,5

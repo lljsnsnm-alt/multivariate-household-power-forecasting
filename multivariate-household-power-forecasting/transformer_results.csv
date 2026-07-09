@@ -1,0 +1,3 @@
+model,horizon,mse_mean,mse_std,mae_mean,mae_std
+Transformer,90,238576.9,13841.724,379.19293,14.677986
+Transformer,365,312869.72,65755.86,444.82455,53.735657
